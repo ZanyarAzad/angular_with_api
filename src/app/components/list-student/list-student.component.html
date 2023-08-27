@@ -1,0 +1,77 @@
+<h1 class="text-xl font-bold text-black my-[5vh]">List Students</h1>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg my-[3vh]">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-[2vw] py-[2.4vh]">
+          #
+        </th>
+        <th scope="col" class="px-[3vw] py-[2.4vh]">
+         name
+        </th>
+        <th scope="col" class="px-[3vw] py-[2.4vh]">
+          Email
+        </th>
+        <th scope="col" class="px-[3vw] py-[2.4vh]">
+          Action
+        </th>
+      </tr>
+    </thead>
+    <tbody class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <tr *ngFor="let item of getDisplayedStudent()" class="bg-white border-b">
+          <td class="px-[2vw] py-[2.4vh] font-medium text-dark">
+              {{ item.id }}
+          </td>
+          <td class=" px-[2vw] py-[2.4vh] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
+              {{ item.name }}
+          </td>
+          <td class="px-[2vw] py-[2.4vh] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
+              {{ item.email }}
+          </td>
+          <td >
+            <div class="px-[2vw] overflow-hidden whitespace-nowrap text-overflow-ellipsis">
+              <button type="button" (click)="deleteStudent(item.id)" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Delete</button>
+              <button type="button" routerLink="/edit/{{item.id}}" class="focus:outline-none text-white bg-blue-700 hover:bg-vlue-800 focus:ring-4 focus:ring-bliue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Edit</button>
+            </div>
+
+          </td>
+      </tr>
+  </tbody>
+  </table>
+  <div class="flex justify-center items-center bg-white py-[1vh]">
+    <ul class="flex items-center space-x-1 text-sm">
+      <!-- previous button -->
+      <li>
+        <div (click)="previousPage()"
+          class="flex items-center justify-center w-8 h-8 text-primary  cursor-pointer">
+          <span class="sr-only">Previous</span>
+          <svg class="w-[1vw] h-[1vw]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M5 1 1 5l4 4" />
+          </svg>
+        </div>
+      </li>
+      <!-- pagination numbers -->
+      <li *ngFor="let page of [].constructor(totalPages); let i = index">
+        <div (click)="goToPage(i + 1)" [class.active]="i + 1 === currentPage"
+          class="w-8 h-8 flex items-center justify-center text-white border rounded-full bg-gray-700 cursor-pointer">
+          {{ i + 1 }}
+        </div>
+      </li>
+      <!-- next button -->
+      <li>
+        <div (click)="nextPage()"
+          class="flex items-center justify-center w-8 h-8 text-primary rounded-full  cursor-pointer">
+          <span class="sr-only">Next</span>
+          <svg class="w-[1vw] h-[1vw]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 9 4-4-4-4" />
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
